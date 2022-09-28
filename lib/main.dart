@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:practice_provider/provider/count_provider.dart';
+import 'package:practice_provider/provider/favitem_provider.dart';
 import 'package:practice_provider/provider/slider_provider.dart';
-import 'package:practice_provider/screens/slider_second_example.dart';
+import 'package:practice_provider/screens/favourite/favitem_third_ex.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -22,8 +23,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => SliderProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => FavitemProvider(),
+        ),
       ],
       child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
             // This is the theme of your application.
@@ -37,7 +42,7 @@ class MyApp extends StatelessWidget {
             // is not restarted.
             primarySwatch: Colors.blue,
           ),
-          home: const SliderExample()),
+          home: const FavItemExample()),
     );
   }
 }
