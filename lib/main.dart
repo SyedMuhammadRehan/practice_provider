@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practice_provider/provider/count_provider.dart';
-import 'package:practice_provider/screens/count_example.dart';
+import 'package:practice_provider/provider/slider_provider.dart';
+import 'package:practice_provider/screens/slider_second_example.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -13,8 +14,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => CountProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => CountProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SliderProvider(),
+        ),
+      ],
       child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
@@ -29,7 +37,7 @@ class MyApp extends StatelessWidget {
             // is not restarted.
             primarySwatch: Colors.blue,
           ),
-          home: const CountExapmle()),
+          home: const SliderExample()),
     );
   }
 }
