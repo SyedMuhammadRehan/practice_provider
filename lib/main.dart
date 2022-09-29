@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:practice_provider/provider/count_provider.dart';
 import 'package:practice_provider/provider/favitem_provider.dart';
 import 'package:practice_provider/provider/slider_provider.dart';
-import 'package:practice_provider/screens/favourite/favitem_third_ex.dart';
+import 'package:practice_provider/provider/theme_mode_provider.dart';
+import 'package:practice_provider/screens/light_and_dark_theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -16,33 +17,38 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => CountProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => SliderProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => FavitemProvider(),
-        ),
-      ],
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            // This is the theme of your application.
-            //
-            // Try running your application with "flutter run". You'll see the
-            // application has a blue toolbar. Then, without quitting the app, try
-            // changing the primarySwatch below to Colors.green and then invoke
-            // "hot reload" (press "r" in the console where you ran "flutter run",
-            // or simply save your changes to "hot reload" in a Flutter IDE).
-            // Notice that the counter didn't reset back to zero; the application
-            // is not restarted.
-            primarySwatch: Colors.blue,
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => CountProvider(),
           ),
-          home: const FavItemExample()),
-    );
+          ChangeNotifierProvider(
+            create: (_) => SliderProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => FavitemProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => ThemeModeProvider(),
+          ),
+        ],
+        child: Builder(
+          builder: (BuildContext context) {
+            final themeprovider = Provider.of<ThemeModeProvider>(context);
+            return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Flutter Demo',
+                themeMode: themeprovider.themeMode,
+                theme: ThemeData(
+                  brightness: Brightness.light,
+                  primarySwatch: Colors.red,
+                ),
+                darkTheme: ThemeData(
+                    brightness: Brightness.dark,
+                    primarySwatch: Colors.red,
+                    primaryColor: Colors.red,
+                    iconTheme: const IconThemeData(color: Colors.pink)),
+                home: const LightAndDarkTheme());
+          },
+        ));
   }
 }
