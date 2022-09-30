@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:practice_provider/provider/authprovider.dart';
 import 'package:practice_provider/provider/count_provider.dart';
 import 'package:practice_provider/provider/favitem_provider.dart';
 import 'package:practice_provider/provider/slider_provider.dart';
 import 'package:practice_provider/provider/theme_mode_provider.dart';
-import 'package:practice_provider/screens/light_and_dark_theme.dart';
+import 'package:practice_provider/screens/login_wihApi.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (_) => ThemeModeProvider(),
           ),
+          ChangeNotifierProvider(
+            create: (_) => AuthProvider(),
+          ),
         ],
         child: Builder(
           builder: (BuildContext context) {
@@ -47,7 +51,7 @@ class MyApp extends StatelessWidget {
                     primarySwatch: Colors.red,
                     primaryColor: Colors.red,
                     iconTheme: const IconThemeData(color: Colors.pink)),
-                home: const LightAndDarkTheme());
+                home: const LoginWithApi());
           },
         ));
   }
